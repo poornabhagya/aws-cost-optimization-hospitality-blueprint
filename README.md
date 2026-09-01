@@ -1,4 +1,4 @@
-# 🏨 Hospitality OS: Cloud Architecture & FinOps Blueprint
+#  Hospitality OS: Cloud Architecture & FinOps Blueprint
 ### Enterprise-Grade Multi-Tenant Hospitality Platform Downscaled to a Zero-Cost ($0.00/mo) Production Baseline
 
 [![AWS Architecture](https://img.shields.io/badge/AWS-Free--Tier%20Compliant-FF9900?logo=amazon-aws&logoColor=white)](https://aws.amazon.com/free/)
@@ -22,7 +22,7 @@ Designed by Principal Cloud and FinOps Architects, this repository provides two 
 
 ---
 
-## 📊 FinOps & Cost Optimization Matrix
+##  FinOps & Cost Optimization Matrix
 
 The table below contrasts the monthly cloud infrastructure expenditures between the Enterprise Multi-AZ Baseline and the Zero-Cost Free-Tier Target:
 
@@ -48,7 +48,7 @@ The table below contrasts the monthly cloud infrastructure expenditures between 
 
 ---
 
-## 🏛️ Visual Architecture Showcase
+##  Visual Architecture Showcase
 
 ### 1. High-Level Architecture (HLA) Topology Comparison
 
@@ -107,7 +107,7 @@ Zero-cost, high-performance modular topology packing ingress, API workers, and t
 
 ---
 
-## 📑 Architectural Decision Records (ADR) Summary
+##  Architectural Decision Records (ADR) Summary
 
 The table below summarizes the 11 Architectural Decision Records documented in [`docs/Free Tier Baseline/ADR_COLLECTION.md`](./Free-Tier-Baseline/ADR_COLLECTION.md):
 
@@ -127,7 +127,7 @@ The table below summarizes the 11 Architectural Decision Records documented in [
 
 ---
 
-## 🔒 Security, Compliance & Governance Highlights
+##  Security, Compliance & Governance Highlights
 
 Hospitality OS enforces a **Defense-in-Depth, Zero-Trust Architecture** operating at $0.00 incremental security spend:
 
@@ -170,7 +170,7 @@ Hospitality OS enforces a **Defense-in-Depth, Zero-Trust Architecture** operatin
 
 ---
 
-## 🚀 Continuous Delivery (CI/CD) & GitOps Engine
+##  Continuous Delivery (CI/CD) & GitOps Engine
 
 The deployment pipeline is orchestrated through **GitHub Actions** and **AWS SSM**, executing deterministically within the **2,000 monthly free CI minutes**:
 
@@ -216,7 +216,7 @@ flowchart TD
 
 ---
 
-## 📂 Repository Layout Guide
+##  Repository Layout Guide
 
 ```
 .
@@ -262,7 +262,7 @@ flowchart TD
 
 ---
 
-## 🛠️ Quick Start & Deployment Guide
+##  Quick Start & Deployment Guide
 
 ### Prerequisites
 * [Terraform >= 1.9.0](https://www.terraform.io/downloads.html)
@@ -294,7 +294,7 @@ aws cloudwatch describe-alarms --alarm-names "hospitality-os-free-tier-budget-br
 
 ---
 
-## 📜 Compliance, Governance & License
+##  Compliance, Governance & License
 
 * **PCI-DSS Compliance:** Validated for **SAQ-A** merchant environments via hosted Stripe tokenization.
 * **Data Privacy:** Fully compliant with **GDPR Article 17** via cryptographic salt deletion.
