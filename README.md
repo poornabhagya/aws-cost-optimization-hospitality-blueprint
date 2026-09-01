@@ -1,4 +1,4 @@
-# 🏨 Hospitality OS: Cloud Architecture & FinOps Blueprint
+#  Hospitality OS: Cloud Architecture & FinOps Blueprint
 
 ### Enterprise-Grade Multi-Tenant Hospitality Platform Downscaled to a Zero-Cost ($0.00/mo) Production Baseline
 
@@ -11,7 +11,7 @@
 
 ---
 
-## 📌 Executive Summary & Value Proposition
+##  Executive Summary & Value Proposition
 
 **Hospitality OS** is a high-availability, cloud-native hospitality management operating system encompassing **Property Management (PMS)**, **Point-of-Sale (POS)**, **Inventory & Recipe BOM Management**, **Guest Booking Engine**, and an **Append-Only General Ledger (GL)**.
 
@@ -20,11 +20,11 @@ Engineered by Principal Cloud and FinOps Architects, this repository delivers a 
 - **Enterprise Multi-AZ Baseline ([AWS Calculator Export: $294.90 USD / mo](./Enterprise-Baseline/cloud%20infra%20enterprise%20plan.pdf)):** Production multi-AZ topology featuring AWS ECS Fargate serverless containers, Multi-AZ RDS PostgreSQL 17, Application Load Balancers (ALB), AWS WAF Layer-7 WebACLs, ElastiCache Redis, and AWS PrivateLink Interface Endpoints.
 - **Zero-Cost Free-Tier Target ([AWS Calculator Export: $0.00 Net / $22.95 Gross USD / mo](./Free-Tier-Baseline/cloud%20infra%20free%20tier%20plan.pdf)):** Single-host containerized Graviton2 compute plane (`t4g.micro`), Single-AZ RDS PostgreSQL 17 (`db.t4g.micro`), In-Container NGINX TLS 1.3 & Rate Limiting, In-Container Redis 7.2 AOF, and a 2-Tier Lean VPC (`10.0.0.0/16`) with 0 NAT Gateways and 0 PrivateLink Endpoints.
 
-> 💡 **The FinOps Breakthrough:** We reduced cloud infrastructure spending from **$294.90/month ($3,538.80/year) to $0.00/month Net Spend (100% Cost Reduction)** during the AWS 12-Month Free Tier. Even in a raw post-free-tier scenario, the gross footprint costs just **$22.95/month (a 92.2% baseline reduction)**—all while preserving **72-hour offline POS autonomy**, **sub-120ms API latency ($p_{95}$)**, **PCI-DSS SAQ-A tokenization**, **GDPR cryptographic salt-shredding**, and **7-year S3 WORM compliance data locking**.
+>  **The FinOps Breakthrough:** We reduced cloud infrastructure spending from **$294.90/month ($3,538.80/year) to $0.00/month Net Spend (100% Cost Reduction)** during the AWS 12-Month Free Tier. Even in a raw post-free-tier scenario, the gross footprint costs just **$22.95/month (a 92.2% baseline reduction)**—all while preserving **72-hour offline POS autonomy**, **sub-120ms API latency ($p_{95}$)**, **PCI-DSS SAQ-A tokenization**, **GDPR cryptographic salt-shredding**, and **7-year S3 WORM compliance data locking**.
 
 ---
 
-## 📊 FinOps & Cost Optimization Matrix
+##  FinOps & Cost Optimization Matrix
 
 The following data is extracted directly from the official **AWS Pricing Calculator PDF reports** generated for **AWS Mumbai (`ap-south-1`)**:
 
@@ -45,7 +45,7 @@ The following data is extracted directly from the official **AWS Pricing Calcula
 
 ---
 
-### 📈 Multi-Tenant Unit Economics & SaaS COGS Analysis
+###  Multi-Tenant Unit Economics & SaaS COGS Analysis
 
 For a single boutique property generating **1,000 monthly transactions** (guest room bookings and dining checks):
 
@@ -292,7 +292,7 @@ flowchart TD
 
 ---
 
-## 🛠️ Quick Start & Deployment Guide
+##  Quick Start & Deployment Guide
 
 ### Prerequisites
 
