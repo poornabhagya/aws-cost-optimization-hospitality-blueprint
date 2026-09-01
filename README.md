@@ -1,5 +1,6 @@
 # 🏨 Hospitality OS: Cloud Architecture & FinOps Blueprint
-### Enterprise Multi-Tenant SaaS Downscaled to a Zero-Cost ($0.00/mo) Production Baseline
+
+### Enterprise-Grade Multi-Tenant Hospitality Platform Downscaled to a Zero-Cost ($0.00/mo) Production Baseline
 
 [![AWS Architecture](https://img.shields.io/badge/AWS-Free--Tier%20Compliant-FF9900?logo=amazon-aws&logoColor=white)](https://aws.amazon.com/free/)
 [![Pricing Calculator Enterprise](https://img.shields.io/badge/Enterprise%20Plan-%24294.90%20%2F%20mo-red?logo=amazon-aws)](./Enterprise-Baseline/cloud%20infra%20enterprise%20plan.pdf)
@@ -16,31 +17,31 @@
 
 Engineered by Principal Cloud and FinOps Architects, this repository delivers a complete comparative blueprint contrasting an **Enterprise Multi-AZ Cloud Architecture** against an ultra-lean, **Zero-Cost Production Free-Tier Architecture**:
 
-* **Enterprise Multi-AZ Baseline ([AWS Calculator Export: $294.90 USD / mo](./Enterprise-Baseline/cloud%20infra%20enterprise%20plan.pdf)):** Production multi-AZ topology featuring AWS ECS Fargate serverless containers, Multi-AZ RDS PostgreSQL 17, Application Load Balancers (ALB), AWS WAF Layer-7 WebACLs, ElastiCache Redis, and AWS PrivateLink Interface Endpoints.
-* **Zero-Cost Free-Tier Target ([AWS Calculator Export: $0.00 Net / $22.95 Gross USD / mo](./Free-Tier-Baseline/cloud%20infra%20free%20tier%20plan.pdf)):** Single-host containerized Graviton2 compute plane (`t4g.micro`), Single-AZ RDS PostgreSQL 17 (`db.t4g.micro`), In-Container NGINX TLS 1.3 & Rate Limiting, In-Container Redis 7.2 AOF, and a 2-Tier Lean VPC (`10.0.0.0/16`) with 0 NAT Gateways and 0 PrivateLink Endpoints.
+- **Enterprise Multi-AZ Baseline ([AWS Calculator Export: $294.90 USD / mo](./Enterprise-Baseline/cloud%20infra%20enterprise%20plan.pdf)):** Production multi-AZ topology featuring AWS ECS Fargate serverless containers, Multi-AZ RDS PostgreSQL 17, Application Load Balancers (ALB), AWS WAF Layer-7 WebACLs, ElastiCache Redis, and AWS PrivateLink Interface Endpoints.
+- **Zero-Cost Free-Tier Target ([AWS Calculator Export: $0.00 Net / $22.95 Gross USD / mo](./Free-Tier-Baseline/cloud%20infra%20free%20tier%20plan.pdf)):** Single-host containerized Graviton2 compute plane (`t4g.micro`), Single-AZ RDS PostgreSQL 17 (`db.t4g.micro`), In-Container NGINX TLS 1.3 & Rate Limiting, In-Container Redis 7.2 AOF, and a 2-Tier Lean VPC (`10.0.0.0/16`) with 0 NAT Gateways and 0 PrivateLink Endpoints.
 
 > 💡 **The FinOps Breakthrough:** We reduced cloud infrastructure spending from **$294.90/month ($3,538.80/year) to $0.00/month Net Spend (100% Cost Reduction)** during the AWS 12-Month Free Tier. Even in a raw post-free-tier scenario, the gross footprint costs just **$22.95/month (a 92.2% baseline reduction)**—all while preserving **72-hour offline POS autonomy**, **sub-120ms API latency ($p_{95}$)**, **PCI-DSS SAQ-A tokenization**, **GDPR cryptographic salt-shredding**, and **7-year S3 WORM compliance data locking**.
 
 ---
 
-## 💰 Itemized FinOps & Cost Optimization Matrix
+## 📊 FinOps & Cost Optimization Matrix
 
 The following data is extracted directly from the official **AWS Pricing Calculator PDF reports** generated for **AWS Mumbai (`ap-south-1`)**:
 
-| Subsystem & Domain | Enterprise Multi-AZ Baseline<br>([PDF Report: 08/23/2026](./Enterprise-Baseline/cloud%20infra%20enterprise%20plan.pdf)) | Zero-Cost Free-Tier Target<br>([PDF Report: 08/28/2026](./Free-Tier-Baseline/cloud%20infra%20free%20tier%20plan.pdf)) | AWS Free Tier Quota / Mechanism | Monthly Cost Delta | Free-Tier Net Spend |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **VPC & Isolation** | **$196.25 / mo**<br>• 1x Regional NAT Gateway ($32.85)<br>• 6x PrivateLink Endpoints ($163.40) | **$0.00 / mo**<br>• 0 NAT Gateways<br>• 0 PrivateLink Endpoints | 2-Tier Lean VPC (`10.0.0.0/16`) with Direct Free IGW & Security Group ACLs | **-$196.25** | **$0.00** |
-| **Database Plane** | **$37.80 / mo**<br>• RDS PostgreSQL Multi-AZ<br>• `db.t4g.micro` + 20GB gp3 + Backup | **$17.95 Gross / $0.00 Net**<br>• RDS PostgreSQL Single-AZ<br>• `db.t4g.micro` (20GB gp3) | **750 Hours / Month + 20 GB gp3 SSD Storage** (12-Month Free Tier) | **-$37.80** | **$0.00** |
-| **Ingress & WAF** | **$28.74 / mo**<br>• AWS Application Load Balancer ($17.68)<br>• AWS WAF WebACL + 3 Rules ($11.06) | **$0.00 / mo**<br>• In-Container NGINX Reverse Proxy<br>• Let's Encrypt TLS 1.3 / ACME | Open Source NGINX Alpine with `limit_req_zone` rate limiting | **-$28.74** | **$0.00** |
-| **Cache & Tasks** | **$14.60 / mo**<br>• AWS ElastiCache Redis 7.2<br>• `cache.t4g.micro` | **$0.00 / mo**<br>• In-Container Redis 7.2 Alpine<br>• Localhost IPC (`maxmemory 128mb`) | Embedded in-container state with Append-Only File (AOF) disk persistence | **-$14.60** | **$0.00** |
-| **Compute Plane** | **$10.61 / mo**<br>• AWS ECS Fargate Tasks (Dual-AZ)<br>• 24 hrs/day ARM Architecture | **$4.71 Gross / $0.00 Net**<br>• 1x EC2 `t4g.micro` (ARM64 Graviton2)<br>• 2 vCPU, 1.0 GB RAM, 30GB gp3 | **750 Hours / Month `t4g.micro`** (12-Month Free Tier) | **-$10.61** | **$0.00** |
-| **Telemetry & APM** | **$5.22 / mo**<br>• CloudWatch Log Ingestion & OTEL<br>• 5 Metric Alarms | **$0.10 Gross / $0.00 Net**<br>• CloudWatch Basic Metrics<br>• 1 Billing Alarm ($0.50 Threshold) | **10 Custom Metrics + 3 Alarms** (Perpetual Always-Free Tier) | **-$5.22** | **$0.00** |
-| **Secrets & KMS** | **$2.23 / mo**<br>• AWS Secrets Manager ($1.20)<br>• AWS KMS Customer CMK ($1.03) | **$0.00 / mo**<br>• Host-level `.env.production` (`chmod 600`)<br>• AWS Managed Encryption (SSE-S3) | GitHub Repository Secrets + AWS IAM Instance Role | **-$2.23** | **$0.00** |
-| **Static Storage** | **$0.13 / mo**<br>• S3 Standard (10GB) + Glacier Archive | **$0.14 Gross / $0.00 Net**<br>• S3 Standard (5GB Web & Compliance) | **5 GB S3 Standard Storage + 20k GETs** (12-Month Free Tier) | **-$0.13** | **$0.00** |
-| **Container Registry**| **$0.00 / mo** (Included) | **$0.05 Gross / $0.00 Net**<br>• Amazon ECR Private Repository | **500 MB / Month Private Image Storage** (Always-Free Tier) | **$0.00** | **$0.00** |
-| **DNS Management** | **$0.52 / mo**<br>• Route 53 Public Hosted Zone | **$0.00 – $0.50 / mo**<br>• Route 53 Apex Hosted Zone (Optional) | External DNS Registrar (Free) or 1 Hosted Zone ($0.50/mo) | **-$0.02** | **$0.00 – $0.50** |
-| **CDN & Edge** | **$0.00 / mo** (Free Tier) | **$0.00 / mo**<br>• Amazon CloudFront CDN (OAC) | **1 TB / Month Data Transfer Out** (Perpetual Always-Free Tier) | **$0.00** | **$0.00** |
-| **TOTALS** | **$294.90 USD / mo**<br>($3,538.80 / year) | **$22.95 Gross USD / mo**<br>($275.40 / year uncredited) | **AWS 12-Month Free Tier + Always-Free Tier Envelope** | **-$294.90 / mo**<br>**(100.0% Savings)** | **$0.00 USD / mo**<br>(**< $0.50 / mo** ceiling) |
+| Subsystem & Domain     | Enterprise Multi-AZ Baseline<br>([PDF Report: 08/23/2026](./Enterprise-Baseline/cloud%20infra%20enterprise%20plan.pdf)) | Zero-Cost Free-Tier Target<br>([PDF Report: 08/28/2026](./Free-Tier-Baseline/cloud%20infra%20free%20tier%20plan.pdf)) | AWS Free Tier Quota / Mechanism                                            | Monthly Cost Delta                        | Free-Tier Net Spend                              |
+| :--------------------- | :---------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------- | :---------------------------------------- | :----------------------------------------------- |
+| **VPC & Isolation**    | **$196.25 / mo**<br>• 1x Regional NAT Gateway ($32.85)<br>• 6x PrivateLink Endpoints ($163.40)                          | **$0.00 / mo**<br>• 0 NAT Gateways<br>• 0 PrivateLink Endpoints                                                       | 2-Tier Lean VPC (`10.0.0.0/16`) with Direct Free IGW & Security Group ACLs | **-$196.25**                              | **$0.00**                                        |
+| **Database Plane**     | **$37.80 / mo**<br>• RDS PostgreSQL Multi-AZ<br>• `db.t4g.micro` + 20GB gp3 + Backup                                    | **$17.95 Gross / $0.00 Net**<br>• RDS PostgreSQL Single-AZ<br>• `db.t4g.micro` (20GB gp3)                             | **750 Hours / Month + 20 GB gp3 SSD Storage** (12-Month Free Tier)         | **-$37.80**                               | **$0.00**                                        |
+| **Ingress & WAF**      | **$28.74 / mo**<br>• AWS Application Load Balancer ($17.68)<br>• AWS WAF WebACL + 3 Rules ($11.06)                      | **$0.00 / mo**<br>• In-Container NGINX Reverse Proxy<br>• Let's Encrypt TLS 1.3 / ACME                                | Open Source NGINX Alpine with `limit_req_zone` rate limiting               | **-$28.74**                               | **$0.00**                                        |
+| **Cache & Tasks**      | **$14.60 / mo**<br>• AWS ElastiCache Redis 7.2<br>• `cache.t4g.micro`                                                   | **$0.00 / mo**<br>• In-Container Redis 7.2 Alpine<br>• Localhost IPC (`maxmemory 128mb`)                              | Embedded in-container state with Append-Only File (AOF) disk persistence   | **-$14.60**                               | **$0.00**                                        |
+| **Compute Plane**      | **$10.61 / mo**<br>• AWS ECS Fargate Tasks (Dual-AZ)<br>• 24 hrs/day ARM Architecture                                   | **$4.71 Gross / $0.00 Net**<br>• 1x EC2 `t4g.micro` (ARM64 Graviton2)<br>• 2 vCPU, 1.0 GB RAM, 30GB gp3               | **750 Hours / Month `t4g.micro`** (12-Month Free Tier)                     | **-$10.61**                               | **$0.00**                                        |
+| **Telemetry & APM**    | **$5.22 / mo**<br>• CloudWatch Log Ingestion & OTEL<br>• 5 Metric Alarms                                                | **$0.10 Gross / $0.00 Net**<br>• CloudWatch Basic Metrics<br>• 1 Billing Alarm ($0.50 Threshold)                      | **10 Custom Metrics + 3 Alarms** (Perpetual Always-Free Tier)              | **-$5.22**                                | **$0.00**                                        |
+| **Secrets & KMS**      | **$2.23 / mo**<br>• AWS Secrets Manager ($1.20)<br>• AWS KMS Customer CMK ($1.03)                                       | **$0.00 / mo**<br>• Host-level `.env.production` (`chmod 600`)<br>• AWS Managed Encryption (SSE-S3)                   | GitHub Repository Secrets + AWS IAM Instance Role                          | **-$2.23**                                | **$0.00**                                        |
+| **Static Storage**     | **$0.13 / mo**<br>• S3 Standard (10GB) + Glacier Archive                                                                | **$0.14 Gross / $0.00 Net**<br>• S3 Standard (5GB Web & Compliance)                                                   | **5 GB S3 Standard Storage + 20k GETs** (12-Month Free Tier)               | **-$0.13**                                | **$0.00**                                        |
+| **Container Registry** | **$0.00 / mo** (Included)                                                                                               | **$0.05 Gross / $0.00 Net**<br>• Amazon ECR Private Repository                                                        | **500 MB / Month Private Image Storage** (Always-Free Tier)                | **$0.00**                                 | **$0.00**                                        |
+| **DNS Management**     | **$0.52 / mo**<br>• Route 53 Public Hosted Zone                                                                         | **$0.00 – $0.50 / mo**<br>• Route 53 Apex Hosted Zone (Optional)                                                      | External DNS Registrar (Free) or 1 Hosted Zone ($0.50/mo)                  | **-$0.02**                                | **$0.00 – $0.50**                                |
+| **CDN & Edge**         | **$0.00 / mo** (Free Tier)                                                                                              | **$0.00 / mo**<br>• Amazon CloudFront CDN (OAC)                                                                       | **1 TB / Month Data Transfer Out** (Perpetual Always-Free Tier)            | **$0.00**                                 | **$0.00**                                        |
+| **TOTALS**             | **$294.90 USD / mo**<br>($3,538.80 / year)                                                                              | **$22.95 Gross USD / mo**<br>($275.40 / year uncredited)                                                              | **AWS 12-Month Free Tier + Always-Free Tier Envelope**                     | **-$294.90 / mo**<br>**(100.0% Savings)** | **$0.00 USD / mo**<br>(**< $0.50 / mo** ceiling) |
 
 ---
 
@@ -52,21 +53,23 @@ $$\text{Enterprise Cost / Transaction} = \frac{\$294.90}{1,000} = \mathbf{\$0.29
 
 $$\text{Free-Tier Net Cost / Transaction} = \frac{\$0.0000}{1,000} = \mathbf{\$0.0000\text{ USD / transaction}}$$
 
-* **Entry-Level SaaS Contract Profitability (Rs. 30,000 / ~$100 USD ACV):**
-  * **Enterprise Baseline COGS:** $294.90/mo $\rightarrow$ **-194.9% Negative Margin (Net Loss)**
-  * **Free-Tier Target COGS:** $0.00/mo $\rightarrow$ **100.0% Gross Profit Margin (Maximum Capital Efficiency)**
+- **Entry-Level SaaS Contract Profitability (Rs. 30,000 / ~$100 USD ACV):**
+  - **Enterprise Baseline COGS:** $294.90/mo $\rightarrow$ **-194.9% Negative Margin (Net Loss)**
+  - **Free-Tier Target COGS:** $0.00/mo $\rightarrow$ **100.0% Gross Profit Margin (Maximum Capital Efficiency)**
 
 ---
 
-## 🏛️ Visual Architecture Showcase
+## Visual Architecture Showcase
 
 ### 1. High-Level Architecture (HLA) Topology Comparison
 
 #### Enterprise Multi-AZ Baseline Architecture
+
 Dual-AZ high-availability architecture with managed load balancers, serverless container tasks, and dedicated managed data services:
 ![Enterprise High-Level Architecture](architecture/hospitality_os_hla_enterprise_architecture.png)
 
 #### Free-Tier Single-Host Lean Architecture
+
 Zero-cost, high-performance architecture orchestrating ingress, API workers, and task queues on ARM64 Graviton2 compute with a dedicated managed database:
 ![Free-Tier High-Level Architecture](architecture/hospitality_os_hla_free_tier_architecture.png)
 
@@ -75,9 +78,11 @@ Zero-cost, high-performance architecture orchestrating ingress, API workers, and
 ### 2. Cloud Low-Level Design (LLD) Network Topology
 
 #### Free-Tier Low-Level Design (`10.0.0.0/16` Lean VPC)
+
 ![Free-Tier Cloud Low-Level Design](architecture/hospitality_os_cloud_lld_Frree_tier_architecture.png)
 
 #### Enterprise Cloud Low-Level Design (Multi-AZ VPC & PrivateLink)
+
 ![Enterprise Cloud Low-Level Design](architecture/hospitality_os_cloud_lld_architecture.png)
 
 ```
@@ -124,27 +129,27 @@ Zero-cost, high-performance architecture orchestrating ingress, API workers, and
 
 ---
 
-## 📑 Architectural Decision Records (ADR) Summary
+## Architectural Decision Records (ADR) Summary
 
 The table below outlines the 11 Architectural Decision Records documented in [`docs/Free Tier Baseline/ADR_COLLECTION.md`](./Free-Tier-Baseline/ADR_COLLECTION.md):
 
-| ADR ID | Decision Title | Status | Selected Approach & Technical Specification | Rationale & Trade-Off Mitigation |
-| :--- | :--- | :--- | :--- | :--- |
-| **ADR-001** | Cloud Provider Ecosystem | **Accepted** | Amazon Web Services (AWS Free Tier) | Combines 750h compute, 750h managed RDS, and 1TB CloudFront CDN under a unified IAM control plane. |
-| **ADR-002** | Single-Host Containerized Compute | **Accepted** | 1x `t4g.micro` EC2 + Docker Compose (ARM64) | Replaces ECS Fargate ($10.61/mo); 72h offline POS autonomy isolates property operations during host restarts. |
-| **ADR-003** | Edge Ingress & SSL Termination | **Accepted** | In-Container NGINX + Certbot Sidecar | Eliminates ALB ($17.68/mo) & WAF ($11.06/mo); enforces TLS 1.3 and sub-millisecond route rate limiting. |
-| **ADR-004** | Relational Persistence Plane | **Accepted** | AWS RDS PostgreSQL 17 Single-AZ (`db.t4g.micro`) | Replaces Multi-AZ ($37.80/mo); provides dedicated 1GB RAM, 20GB gp3 SSD, and daily automated snapshots. |
-| **ADR-005** | Embedded Ephemeral State & Broker | **Accepted** | In-Container Redis 7.2 Alpine (`maxmemory 128mb`) | Eliminates ElastiCache ($14.60/mo); AOF disk sync to persistent EBS volume protects locks and queues. |
-| **ADR-006** | Client Web Delivery & Archival | **Accepted** | Amazon S3 (5GB Free) + CloudFront CDN (1TB Free) | Private S3 origin with SigV4 OAC; offloads 100% of frontend React SPA traffic from the EC2 compute host. |
-| **ADR-007** | Zero-Cost Lean VPC Architecture | **Accepted** | 2-Tier Subnets + Security Group Isolation | Eliminates NAT GW & PrivateLink ($196.25/mo); direct IGW for EC2, RDS completely isolated from internet. |
-| **ADR-008** | Secrets & Runtime Configuration | **Accepted** | Docker `.env.production` (`chmod 600`) + GitHub Secrets | Eliminates Secrets Manager ($1.20/mo) & KMS CMK ($1.03/mo); zero static keys stored in Git. |
-| **ADR-009** | Infrastructure as Code (IaC) | **Accepted** | HashiCorp Terraform 1.9+ with S3 Remote State | Eliminates manual ClickOps; ensures 100% deterministic reproducibility and automated CI validation. |
-| **ADR-010** | CI/CD Pipeline & Automated Delivery | **Accepted** | GitHub Actions (OIDC) + Amazon ECR + AWS SSM | Eliminates paid CI servers; short-lived STS tokens push to ECR and deploy via SSM without open SSH port 22. |
-| **ADR-011** | Telemetry & Cost Governance | **Accepted** | CloudWatch Basic Metrics + $0.50 Billing Alarm | Eliminates commercial APM ($15-$30/mo); automated SNS alert triggers if unexpected paid services start. |
+| ADR ID      | Decision Title                      | Status       | Selected Approach & Technical Specification             | Rationale & Trade-Off Mitigation                                                                              |
+| :---------- | :---------------------------------- | :----------- | :------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------ |
+| **ADR-001** | Cloud Provider Ecosystem            | **Accepted** | Amazon Web Services (AWS Free Tier)                     | Combines 750h compute, 750h managed RDS, and 1TB CloudFront CDN under a unified IAM control plane.            |
+| **ADR-002** | Single-Host Containerized Compute   | **Accepted** | 1x `t4g.micro` EC2 + Docker Compose (ARM64)             | Replaces ECS Fargate ($10.61/mo); 72h offline POS autonomy isolates property operations during host restarts. |
+| **ADR-003** | Edge Ingress & SSL Termination      | **Accepted** | In-Container NGINX + Certbot Sidecar                    | Eliminates ALB ($17.68/mo) & WAF ($11.06/mo); enforces TLS 1.3 and sub-millisecond route rate limiting.       |
+| **ADR-004** | Relational Persistence Plane        | **Accepted** | AWS RDS PostgreSQL 17 Single-AZ (`db.t4g.micro`)        | Replaces Multi-AZ ($37.80/mo); provides dedicated 1GB RAM, 20GB gp3 SSD, and daily automated snapshots.       |
+| **ADR-005** | Embedded Ephemeral State & Broker   | **Accepted** | In-Container Redis 7.2 Alpine (`maxmemory 128mb`)       | Eliminates ElastiCache ($14.60/mo); AOF disk sync to persistent EBS volume protects locks and queues.         |
+| **ADR-006** | Client Web Delivery & Archival      | **Accepted** | Amazon S3 (5GB Free) + CloudFront CDN (1TB Free)        | Private S3 origin with SigV4 OAC; offloads 100% of frontend React SPA traffic from the EC2 compute host.      |
+| **ADR-007** | Zero-Cost Lean VPC Architecture     | **Accepted** | 2-Tier Subnets + Security Group Isolation               | Eliminates NAT GW & PrivateLink ($196.25/mo); direct IGW for EC2, RDS completely isolated from internet.      |
+| **ADR-008** | Secrets & Runtime Configuration     | **Accepted** | Docker `.env.production` (`chmod 600`) + GitHub Secrets | Eliminates Secrets Manager ($1.20/mo) & KMS CMK ($1.03/mo); zero static keys stored in Git.                   |
+| **ADR-009** | Infrastructure as Code (IaC)        | **Accepted** | HashiCorp Terraform 1.9+ with S3 Remote State           | Eliminates manual ClickOps; ensures 100% deterministic reproducibility and automated CI validation.           |
+| **ADR-010** | CI/CD Pipeline & Automated Delivery | **Accepted** | GitHub Actions (OIDC) + Amazon ECR + AWS SSM            | Eliminates paid CI servers; short-lived STS tokens push to ECR and deploy via SSM without open SSH port 22.   |
+| **ADR-011** | Telemetry & Cost Governance         | **Accepted** | CloudWatch Basic Metrics + $0.50 Billing Alarm          | Eliminates commercial APM ($15-$30/mo); automated SNS alert triggers if unexpected paid services start.       |
 
 ---
 
-## 🔒 Security, Compliance & Governance Highlights
+## Security, Compliance & Governance Highlights
 
 Hospitality OS enforces a multi-layered **Defense-in-Depth, Zero-Trust Architecture** requiring **$0.00 incremental security licensing**:
 
@@ -163,31 +168,37 @@ Hospitality OS enforces a multi-layered **Defense-in-Depth, Zero-Trust Architect
 ```
 
 ### 1. Lean VPC Isolation ($0.00 Spend)
-* **Public Subnet (`10.0.1.0/24`):** Direct route to Internet Gateway for outbound OS updates and Stripe payment API traffic.
-* **Database Subnets (`10.0.2.0/24`, `10.0.3.0/24`):** **No route to Internet Gateway**. Inbound traffic is strictly restricted to TCP port 5432 from `sg_hospitality_ec2`.
+
+- **Public Subnet (`10.0.1.0/24`):** Direct route to Internet Gateway for outbound OS updates and Stripe payment API traffic.
+- **Database Subnets (`10.0.2.0/24`, `10.0.3.0/24`):** **No route to Internet Gateway**. Inbound traffic is strictly restricted to TCP port 5432 from `sg_hospitality_ec2`.
 
 ### 2. Passwordless IAM OIDC STS Federation
-* Completely eliminates static `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` secrets.
-* GitHub Actions exchanges cryptographic OpenID Connect (OIDC) JWT claims with AWS STS for temporary 15-minute deployment credentials.
+
+- Completely eliminates static `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` secrets.
+- GitHub Actions exchanges cryptographic OpenID Connect (OIDC) JWT claims with AWS STS for temporary 15-minute deployment credentials.
 
 ### 3. Hardened Host Administration (SSH Port 22 Closed)
-* Inbound SSH port `22` is permanently blocked in the Security Group.
-* Engineering shell access and automated deployments execute via **AWS Systems Manager (SSM) Session Manager**.
+
+- Inbound SSH port `22` is permanently blocked in the Security Group.
+- Engineering shell access and automated deployments execute via **AWS Systems Manager (SSM) Session Manager**.
 
 ### 4. PCI-DSS SAQ-A Payment Tokenization
-* Browser checkout sessions utilize **Stripe Elements** direct tokenization.
-* Raw Primary Account Numbers (PAN), CVVs, and magnetic track data never traverse or touch EC2 compute memory or PostgreSQL storage.
+
+- Browser checkout sessions utilize **Stripe Elements** direct tokenization.
+- Raw Primary Account Numbers (PAN), CVVs, and magnetic track data never traverse or touch EC2 compute memory or PostgreSQL storage.
 
 ### 5. GDPR Article 17 Cryptographic Salt-Shredding
-* Guest identifiable information (PII) is encrypted with tenant-specific salt keys.
-* When an erasure request is received, deleting the cryptographic salt renders all stored PII irreversible ciphertext while preserving balanced double-entry accounting records in the General Ledger.
+
+- Guest identifiable information (PII) is encrypted with tenant-specific salt keys.
+- When an erasure request is received, deleting the cryptographic salt renders all stored PII irreversible ciphertext while preserving balanced double-entry accounting records in the General Ledger.
 
 ### 6. 7-Year WORM Compliance Vault (Amazon S3)
-* Finalized guest folios and daily fiscal audit reports are archived to Amazon S3 with **Object Lock in `COMPLIANCE` mode** for 2,555 days (7 years), meeting SEC 17a-4 and European VAT fiscal auditability standards.
+
+- Finalized guest folios and daily fiscal audit reports are archived to Amazon S3 with **Object Lock in `COMPLIANCE` mode** for 2,555 days (7 years), meeting SEC 17a-4 and European VAT fiscal auditability standards.
 
 ---
 
-## 🚀 Continuous Delivery (CI/CD) & GitOps Engine
+## Continuous Delivery (CI/CD) & GitOps Engine
 
 The automated delivery pipeline runs on **GitHub Actions** and **AWS SSM**, executing deterministically within the **2,000 monthly free CI minutes**:
 
@@ -206,20 +217,21 @@ flowchart TD
 ```
 
 ### End-to-End Pipeline Execution Steps:
+
 1. **Automated Quality Gates:**
-   * Static Typing: `mypy --strict` (0 type errors tolerated)
-   * SAST & Security: `bandit -r core_hub modules/` & `trufflehog`
-   * Unit & Integration Tests: `pytest --cov=modules --cov-fail-under=80` (>80% coverage required)
+   - Static Typing: `mypy --strict` (0 type errors tolerated)
+   - SAST & Security: `bandit -r core_hub modules/` & `trufflehog`
+   - Unit & Integration Tests: `pytest --cov=modules --cov-fail-under=80` (>80% coverage required)
 2. **Passwordless AWS Authentication:**
-   * Exchanges GitHub OIDC token with AWS STS for `HospitalityGitHubDeployRole` credentials.
+   - Exchanges GitHub OIDC token with AWS STS for `HospitalityGitHubDeployRole` credentials.
 3. **Parallel Infrastructure & Artifact Compilation:**
-   * **Infrastructure Track:** `terraform validate` and `terraform apply` using S3 remote backend.
-   * **Frontend Track:** Compiles React/Vite SPA, syncs static assets to Amazon S3, and invalidates CloudFront edge caches (`/*`).
-   * **Backend Container Track:** Multi-Arch Docker Buildx compiles native `linux/arm64` container images and pushes to Amazon ECR.
+   - **Infrastructure Track:** `terraform validate` and `terraform apply` using S3 remote backend.
+   - **Frontend Track:** Compiles React/Vite SPA, syncs static assets to Amazon S3, and invalidates CloudFront edge caches (`/*`).
+   - **Backend Container Track:** Multi-Arch Docker Buildx compiles native `linux/arm64` container images and pushes to Amazon ECR.
 4. **Automated ECR Lifecycle Pruning:**
-   * Retains only the **last 3 tagged and untagged images**, guaranteeing repository size stays below the **500 MB Free Tier ceiling**.
+   - Retains only the **last 3 tagged and untagged images**, guaranteeing repository size stays below the **500 MB Free Tier ceiling**.
 5. **Zero-Downtime Host Rollout via AWS SSM:**
-   * Emits an SSM `AWS-RunShellScript` command to the EC2 host:
+   - Emits an SSM `AWS-RunShellScript` command to the EC2 host:
      ```bash
      aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin $REGISTRY
      cd /opt/hospitality-os && docker compose pull
@@ -228,11 +240,11 @@ flowchart TD
      docker system prune -af --volumes
      ```
 6. **Post-Deployment Health Probe & Rollback:**
-   * Probes `https://api.platform.com/health/` (HTTP 200 OK required). Automatically reverts to the previous Git SHA tag if unhealthy within 30 seconds.
+   - Probes `https://api.platform.com/health/` (HTTP 200 OK required). Automatically reverts to the previous Git SHA tag if unhealthy within 30 seconds.
 
 ---
 
-## 📂 Repository Layout Guide
+## Repository Layout Guide
 
 ```
 .
@@ -280,9 +292,16 @@ flowchart TD
 
 ---
 
-## 🛠️ Quick Start & Verification
+## 🛠️ Quick Start & Deployment Guide
+
+### Prerequisites
+
+- [Terraform >= 1.9.0](https://www.terraform.io/downloads.html)
+- [AWS CLI v2](https://aws.amazon.com/cli/) configured with deployment credentials
+- [Docker Desktop / Docker Engine](https://www.docker.com/)
 
 ### 1. Local Development Stack
+
 ```bash
 git clone https://github.com/The-Code-Consortium/hospitality-saas-cloud-blueprints.git
 cd hospitality-saas-cloud-blueprints
@@ -290,6 +309,7 @@ docker compose -f infrastructure/docker-compose.yml up --build -d
 ```
 
 ### 2. Terraform Infrastructure Provisioning
+
 ```bash
 cd infrastructure/terraform
 terraform init
@@ -298,15 +318,16 @@ terraform apply tfplan
 ```
 
 ### 3. Verify CloudWatch Billing Guardrail
+
 ```bash
 aws cloudwatch describe-alarms --alarm-names "hospitality-os-free-tier-budget-breach" --region ap-south-1
 ```
 
 ---
 
-## 📜 Compliance, Governance & License
+## Compliance, Governance & License
 
-* **PCI-DSS Compliance:** Validated for **SAQ-A** merchant environments via hosted Stripe tokenization.
-* **Data Privacy:** Fully compliant with **GDPR Article 17** via cryptographic salt deletion.
-* **Audit Archiving:** Meets **SEC Rule 17a-4** and EU VAT regulations using Amazon S3 WORM Compliance Locking.
-* **License:** Distributed under the **Apache 2.0 License**. See `LICENSE` for details.
+- **PCI-DSS Compliance:** Validated for **SAQ-A** merchant environments via hosted Stripe tokenization.
+- **Data Privacy:** Fully compliant with **GDPR Article 17** via cryptographic salt deletion.
+- **Audit Archiving:** Meets **SEC Rule 17a-4** and EU VAT regulations using Amazon S3 WORM Compliance Locking.
+- **License:** Distributed under the **Apache 2.0 License**. See `LICENSE` for details.
